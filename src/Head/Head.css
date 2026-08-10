@@ -1,0 +1,172 @@
+* {
+  /* Faz padding e borda entrarem no cálculo de largura/altura. */
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Área principal do cabeçalho. */
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  overflow: hidden;
+  min-height: 104px;
+  padding: 20px clamp(20px, 5vw, 76px);
+  color: #f8fafc;
+  background:
+    radial-gradient(circle at 86% 15%, rgba(45, 212, 191, 0.3), transparent 25%),
+    linear-gradient(120deg, #111827 0%, #312e81 52%, #4f46e5 100%);
+  box-shadow: 0 10px 28px rgba(30, 41, 59, 0.22);
+}
+
+.header::after {
+  /* Círculo decorativo no canto inferior direito. */
+  position: absolute;
+  right: -36px;
+  bottom: -84px;
+  width: 210px;
+  height: 210px;
+  border: 28px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.header-brand,
+.header-actions {
+  /* Mantém conteúdo acima do elemento decorativo. */
+  position: relative;
+  z-index: 1;
+}
+
+.header-brand {
+  /* Agrupa ícone e textos do jogo. */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo {
+  /* Bloco visual que funciona como logo. */
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  color: #312e81;
+  background: #fef3c7;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+  font-size: 2rem;
+}
+
+.header-kicker {
+  /* Texto pequeno acima do título. */
+  margin-bottom: 2px;
+  color: #c7d2fe;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  /* Título principal do cabeçalho. */
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.header-actions {
+  /* Agrupa e alinha os botões de controle. */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header-action {
+  /* Estilo padrão para os botões secundários. */
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #eef2ff;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.header-action:hover {
+  /* Feedback visual ao passar o mouse. */
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.header-action-primary {
+  /* Destaca a ação mais importante: misturar cartas. */
+  border-color: #fef3c7;
+  color: #312e81;
+  background: #fef3c7;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
+}
+
+.header-action-primary:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+}
+
+.header-action:focus-visible {
+  /* Indica navegação por teclado. */
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+
+.header-action:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 720px) {
+
+  /* Em telas menores, organiza marca e ações em coluna. */
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    padding: 22px 20px;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+
+  /* Em celulares pequenos, distribui os botões em grade. */
+  .header-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .header-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .header-action-primary {
+    grid-column: 1 / -1;
+  }
+}
