@@ -2,6 +2,8 @@
 
 Jogo da memória desenvolvido com React e Vite. O objetivo é encontrar os pares de imagens: ao clicar em duas cartas, elas permanecem abertas se forem iguais; caso contrário, voltam a ficar ocultas após um instante.
 
+https://memory-game-iota-pied.vercel.app/
+
 ## Funcionalidades
 
 - Geração de pares a partir de uma lista de imagens.
