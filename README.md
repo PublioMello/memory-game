@@ -1,16 +1,43 @@
-# React + Vite
+# Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Jogo da memória desenvolvido com React e Vite. O objetivo é encontrar os pares de imagens: ao clicar em duas cartas, elas permanecem abertas se forem iguais; caso contrário, voltam a ficar ocultas após um instante.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Geração de pares a partir de uma lista de imagens.
+- Embaralhamento das cartas ao iniciar o jogo.
+- Revelação e comparação de duas cartas por vez.
+- Manutenção dos pares encontrados na tela.
+- Botões para mostrar, ocultar e misturar as cartas.
+- O botão **Misturar cartas** só é habilitado quando todas as cartas estão visíveis.
+- Layout responsivo para diferentes tamanhos de tela.
 
-## React Compiler
+## Tecnologias
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- CSS
 
-## Expanding the Oxlint configuration
+## Como executar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Inicie o projeto em modo de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+Para gerar a versão de produção:
+
+```bash
+npm run build
+```
+
+## Uso de IA
+
+Foi utilizada inteligência artificial para apoio da **estilização da interface**, incluindo sugestões de cores, layout, responsividade e transições visuais. A lógica e a implementação do jogo foram desenvolvidas no projeto.

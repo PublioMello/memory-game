@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Head from "./Head/Head.jsx";
 import Body from "./Body/Body.jsx";
 
@@ -11,10 +11,39 @@ function App() {
     "https://images.unsplash.com/photo-1496483648148-47c686dc86a8",
     "https://images.unsplash.com/photo-1591181520189-abcb0735c65d",
   ];
+  // Diz se todas as cartas devem aparecer.
+  const [showAllCards, setShowAllCards] = useState(false);
+
+  // Cada alteração nesse número pede para o Body embaralhar.
+  const [shuffleCount, setShuffleCount] = useState(0);
+
+  function handleShowAll() {
+    setShowAllCards(true);
+  }
+
+  function handleHideAll() {
+    setShowAllCards(false);
+  }
+
+  function handleShuffle() {
+    // Só permite misturar quando todas estiverem visíveis.
+    if (!showAllCards) return;
+
+    setShuffleCount((count) => count + 1);
+  }
   return (
     <div>
-      <Head />
-      <Body images={images} />
+      <Head
+        onShowAll={handleShowAll}
+        onHideAll={handleHideAll}
+        onShuffle={handleShuffle}
+        showAllCards={showAllCards}
+      />
+      <Body
+        images={images}
+        showAllCards={showAllCards}
+        shuffleCount={shuffleCount}
+      />
     </div>
   );
 }

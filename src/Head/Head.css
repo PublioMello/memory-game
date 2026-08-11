@@ -106,7 +106,7 @@
     box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.header-action:hover {
+.header-action:not(:disabled):hover {
   /* Feedback visual ao passar o mouse. */
   border-color: rgba(255, 255, 255, 0.65);
   background: rgba(255, 255, 255, 0.2);
@@ -121,9 +121,16 @@
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
 }
 
-.header-action-primary:hover {
+.header-action-primary:not(:disabled):hover {
   border-color: #ffffff;
   background: #ffffff;
+}
+
+/* Deixa claro que a ação ainda não está disponível. */
+.header-action:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 .header-action:focus-visible {
