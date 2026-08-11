@@ -29,6 +29,7 @@ function Body({ images, showAllCards, shuffleCount }) {
     setCards(
       (currentCards) => [...currentCards].sort(() => Math.random() - 0.5),
       setFlippedCards([]),
+      setMatchedCards([]),
     );
   }, [shuffleCount]);
 
