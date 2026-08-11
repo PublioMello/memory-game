@@ -26,11 +26,12 @@ function Body({ images, showAllCards, shuffleCount }) {
     // Não embaralha ao carregar a página.
     if (shuffleCount === 0) return;
 
-    setCards(
-      (currentCards) => [...currentCards].sort(() => Math.random() - 0.5),
-      setFlippedCards([]),
-      setMatchedCards([]),
+    setCards((currentCards) =>
+      [...currentCards].sort(() => Math.random() - 0.5),
     );
+    setFlippedCards([]);
+    setMatchedCards([]);
+    setIsChecking(false);
   }, [shuffleCount]);
 
   function handleCardClick(card) {
