@@ -26,8 +26,9 @@ function Body({ images, showAllCards, shuffleCount }) {
     // Não embaralha ao carregar a página.
     if (shuffleCount === 0) return;
 
-    setCards((currentCards) =>
-      [...currentCards].sort(() => Math.random() - 0.5),
+    setCards(
+      (currentCards) => [...currentCards].sort(() => Math.random() - 0.5),
+      setFlippedCards([]),
     );
   }, [shuffleCount]);
 
@@ -87,7 +88,9 @@ function Body({ images, showAllCards, shuffleCount }) {
             key={card.id}
             onClick={() => handleCardClick(card)}
           >
-            <span className="card-question" aria-hidden="true">?</span>
+            <span className="card-question" aria-hidden="true">
+              ?
+            </span>
             <img src={card.image} alt="Carta revelada" />
           </button>
         );
