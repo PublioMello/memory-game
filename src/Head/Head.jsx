@@ -1,6 +1,12 @@
 import "./Head.css";
 
-function Head({ onShowAll, onHideAll, onShuffle, showAllCards }) {
+function Head({
+  onShowAll,
+  onHideAll,
+  onShuffle,
+  showAllCards,
+  gameCompleted,
+}) {
   return (
     <header className="header">
       <div className="header-brand">
@@ -24,7 +30,7 @@ function Head({ onShowAll, onHideAll, onShuffle, showAllCards }) {
           className="header-action header-action-primary"
           type="button"
           onClick={onShuffle}
-          disabled={!showAllCards}
+          disabled={!showAllCards && !gameCompleted}
         >
           Misturar cartas
         </button>

@@ -17,6 +17,7 @@ function App() {
   // Cada alteração nesse número pede para o Body embaralhar.
   const [shuffleCount, setShuffleCount] = useState(0);
 
+  const [gameCompleted, setGameCompleted] = useState(false);
   function handleShowAll() {
     setShowAllCards(true);
   }
@@ -26,8 +27,12 @@ function App() {
   }
 
   function handleShuffle() {
-    // Só permite misturar quando todas estiverem visíveis.
-    if (!showAllCards) return;
+    if (!showAllCards && !gameCompleted) return;
+
+    if (gameCompleted) {
+      setShowAllCards(true);
+    }
+    setGameCompleted(false);
 
     setShuffleCount((count) => count + 1);
   }
@@ -38,11 +43,13 @@ function App() {
         onHideAll={handleHideAll}
         onShuffle={handleShuffle}
         showAllCards={showAllCards}
+        gameCompleted={gameCompleted}
       />
       <Body
         images={images}
         showAllCards={showAllCards}
         shuffleCount={shuffleCount}
+        onGameCompleted={() => setGameCompleted(true)}
       />
     </div>
   );

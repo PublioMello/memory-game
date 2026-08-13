@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Body.css";
 
-function Body({ images, showAllCards, shuffleCount }) {
-  //cria dois pares para cada imagem e embarakga aoenas uma vez
+function Body({ images, showAllCards, shuffleCount, onGameCompleted }) {
+  //cria dois pares para cada imagem e embaralha apenas uma vez
   const [cards, setCards] = useState(() =>
     [...images, ...images]
       .map((image, index) => ({
@@ -22,6 +22,9 @@ function Body({ images, showAllCards, shuffleCount }) {
   //impede os cliques enquanto compara duas cartas
   const [isChecking, setIsChecking] = useState(false);
 
+  //descobrir se o jogo terminou
+  const [gameComplete, setGameComplete] = useState(false);
+
   useEffect(() => {
     // Não embaralha ao carregar a página.
     if (shuffleCount === 0) return;
@@ -32,6 +35,7 @@ function Body({ images, showAllCards, shuffleCount }) {
     setFlippedCards([]);
     setMatchedCards([]);
     setIsChecking(false);
+    setGameComplete(false);
   }, [shuffleCount]);
 
   function handleCardClick(card) {
@@ -64,8 +68,14 @@ function Body({ images, showAllCards, shuffleCount }) {
 
     //se as duas cartas forem iguais, mantem abertas
     if (firstCard.pairID === secondCard.pairID) {
+      const newMatchedCards = [...matchedCards, firstCard.pairID];
       setMatchedCards([...matchedCards, firstCard.pairID]);
       setFlippedCards([]);
+      if (newMatchedCards.length === images.length) {
+        setGameComplete(true);
+        onGameCompleted();
+      }
+
       setIsChecking(false);
       return;
     }
@@ -77,27 +87,53 @@ function Body({ images, showAllCards, shuffleCount }) {
     }, 1000);
   }
 
-  return (
-    <main className="game-board">
-      {cards.map((card) => {
-        const isFlipped = flippedCards.includes(card.id);
-        const isMatched = matchedCards.includes(card.pairID);
-        const isRevealed = showAllCards || isFlipped || isMatched;
+  function handleRestartGame() {
+    setMatchedCards([]);
+    setFlippedCards([]);
+  }
+  function handleSeeCards() {
+    setGameComplete(false);
+  }
 
-        return (
-          <button
-            className={`card ${isRevealed ? "is-revealed" : ""}`}
-            key={card.id}
-            onClick={() => handleCardClick(card)}
-          >
-            <span className="card-question" aria-hidden="true">
-              ?
-            </span>
-            <img src={card.image} alt="Carta revelada" />
-          </button>
-        );
-      })}
-    </main>
+  return (
+    <>
+      <main className="game-board">
+        {cards.map((card) => {
+          const isFlipped = flippedCards.includes(card.id);
+          const isMatched = matchedCards.includes(card.pairID);
+          const isRevealed = showAllCards || isFlipped || isMatched;
+
+          return (
+            <button
+              className={`card ${isRevealed ? "is-revealed" : ""}`}
+              key={card.id}
+              onClick={() => handleCardClick(card)}
+            >
+              <span className="card-question" aria-hidden="true">
+                ?
+              </span>
+              <img src={card.image} alt="Carta revelada" />
+            </button>
+          );
+        })}
+      </main>
+      {gameComplete && !showAllCards && (
+        <section className="victory-overlay" role="dialog" aria-modal="true">
+          <div className="victory-card">
+            <span className="trophy">🏆</span>
+            <h2>Parabéns!</h2>
+            <p>Você encontrou todos os pares.</p>
+            <div className="confetti" aria-hidden="true">
+              {Array.from({ length: 24 }, (_, index) => (
+                <i key={index} style={{ "--i": index }} />
+              ))}
+            </div>
+            <button onClick={handleRestartGame}>Reiniciar jogo</button>
+            <button onClick={handleSeeCards}> Ver as cartas</button>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 

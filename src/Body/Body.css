@@ -69,3 +69,138 @@
   opacity: 0;
   transform: scale(0.9);
 }
+
+.victory-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(15 23 42 / 70%);
+  z-index: 10;
+  animation: overlay-in 0.35s ease-out;
+}
+
+.victory-card {
+  position: relative;
+  width: min(90vw, 380px);
+  overflow: hidden;
+  padding: 48px 28px;
+  border-radius: 24px;
+  background: white;
+  text-align: center;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 30%);
+  animation: victory-pop 0.55s cubic-bezier(.2, 1.4, .4, 1);
+}
+
+.trophy {
+  display: block;
+  font-size: 4rem;
+  animation: trophy-bounce 1s ease-in-out infinite;
+}
+
+.victory-card h2 {
+  margin: 12px 0 8px;
+  color: #4f46e5;
+  font-size: 2rem;
+}
+
+.victory-card p {
+  margin-bottom: 24px;
+  color: #475569;
+}
+
+/* Ações exibidas ao terminar a partida. */
+.victory-card button {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Ação principal: começar uma nova partida. */
+.victory-card button:first-of-type {
+  margin-bottom: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 8px 16px rgb(79 70 229 / 28%);
+}
+
+/* Ação secundária: fechar a mensagem e continuar vendo o tabuleiro. */
+.victory-card button:last-of-type {
+  border-color: #c7d2fe;
+  color: #4338ca;
+  background: #eef2ff;
+}
+
+.victory-card button:hover {
+  transform: translateY(-2px);
+}
+
+.victory-card button:first-of-type:hover {
+  box-shadow: 0 12px 22px rgb(79 70 229 / 38%);
+}
+
+.victory-card button:last-of-type:hover {
+  background: #e0e7ff;
+}
+
+.victory-card button:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
+}
+
+.victory-card button:active {
+  transform: translateY(0);
+}
+
+.confetti i {
+  position: absolute;
+  top: -20px;
+  left: calc((var(--i) * 4.3%) + 2%);
+  width: 10px;
+  height: 16px;
+  background: hsl(calc(var(--i) * 35), 85%, 58%);
+  animation: confetti-fall 1.8s ease-in infinite;
+  animation-delay: calc(var(--i) * -0.08s);
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes victory-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes trophy-bounce {
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translateY(430px) rotate(540deg);
+  }
+}
