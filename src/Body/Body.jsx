@@ -90,6 +90,7 @@ function Body({ images, showAllCards, shuffleCount, onGameCompleted }) {
   function handleRestartGame() {
     setMatchedCards([]);
     setFlippedCards([]);
+    setGameComplete(false);
   }
   function handleSeeCards() {
     setGameComplete(false);
